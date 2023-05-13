@@ -1,0 +1,22 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "commonjs": true
+  },
+  "extends": ["standard-with-typescript", "plugin:@next/next/recommended", "next/babel"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": [2, "always"]
+  },
+  "root": true
+}
