@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Pokémon App - Favorite Pokémon Manager
 
-## Getting Started
+This project is a web application developed in Next.js that allows users to search for Pokémon, view individual details, and add their favorite Pokémon to a personalized list. It utilizes the [PokeAPI](https://pokeapi.co/) to obtain detailed information about each Pokémon, employing a Static Site Generation (SSG) approach and dynamic routes to optimize performance.
 
-First, run the development server:
+## 🌐 Access the Application
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+You can access the production application at the following link: [PokeFavorites](https://pokefavorites.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Here are some screenshots of the application:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![Pokémon List](screenshots/lista_pokemon.png)  
+*Main page showing the list of Pokémon.*
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![Pokémon Details](screenshots/detalles_pokemon.png)  
+*Details page of a specific Pokémon.*
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Favorites Page](screenshots/pagina_favoritos.png)  
+*Page showing the user's favorite Pokémon.*
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **[Next.js](https://nextjs.org/) (v13.1.1)**: React framework for web applications.
+- **[React](https://reactjs.org/) (v18.2.0)**: Library for building user interfaces.
+- **[@nextui-org/react](https://nextui.org/)**: UI component library.
+- **[Axios](https://axios-http.com/)**: HTTP client for making requests to the PokeAPI.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Pokémon List**: Displays the first 151 Pokémon from the first generation. Each Pokémon in the list includes an image and its name. Clicking on a Pokémon navigates to a details page.
 
-## Deploy on Vercel
+2. **Pokémon Details Page**:
+   - Detailed information about each Pokémon, including sprites from different poses and versions.
+   - Favorite button to add/remove the Pokémon from the favorites list.
+   - Confetti visual effect when adding a Pokémon to favorites.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Favorites Page**: Displays all the Pokémon that the user has added to favorites. Allows users to remove Pokémon from the favorites list from this view.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. **Dynamic Routes**:
+   - Access Pokémon details by **name** (`/name/[pokemon_name]`) and by **ID** (`/pokemon/[id]`).
+   - Redirects to a custom error page if the Pokémon does not exist.
+
+## Application Structure
+
+- **`/pages/index.tsx`**: Main page, shows the list of Pokémon. Uses SSG to optimize performance when loading the list.
+- **`/pages/pokemon/[id].tsx`** and **`/pages/name/[name].tsx`**: Pokémon details pages, accessible by ID or name. Implements SSG with dynamic routes and daily updates to keep the information current.
+- **`/pages/favorites/index.tsx`**: Favorites page, shows the Pokémon that the user has selected as favorites.
+
+## Integration with PokeAPI
+
+This application connects to the PokeAPI to obtain detailed data about Pokémon, such as names, types, abilities, and sprites. Thanks to this integration, the application can display updated information about each Pokémon and provide an interactive and dynamic experience for users.
+
+## 🚀 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Jonlle/next-pokemon-static.git
+   cd next-pokemon-static
+   ```
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+## Contribution
+
+Contributions are welcome! If you would like to contribute to this project, please follow these steps:
+
+1. Fork the project.
+2. Create a new branch (`git checkout -b feature/new-feature`).
+3. Make your changes and commit (`git commit -m 'Add new feature'`).
+4. Push your changes to your fork (`git push origin feature/new-feature`).
+5. Open a Pull Request.
