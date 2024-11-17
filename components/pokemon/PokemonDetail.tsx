@@ -1,8 +1,12 @@
-import { Button, Card, Container, Grid, Image, Row, Text } from '@nextui-org/react';
-import confetti from 'canvas-confetti';
 import { useEffect, useState } from 'react';
+import { Button, Card, Container, Grid, Image, Progress, Row, Text } from '@nextui-org/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import confetti from 'canvas-confetti';
 import { Pokemon } from '../../interfaces';
-import { localFavorites } from '../../utils';
+import { getSpriteImages, localFavorites } from '../../utils';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 interface Props {
   pokemon: Pokemon;
@@ -10,8 +14,10 @@ interface Props {
 
 export const PokemonDetail: React.FC<Props> = ({ pokemon }) => {
   const { id, name, types, stats, weight, height, base_experience, sprites } = pokemon;
-  const img = sprites.other?.dream_world.front_default || 'default-image-url.svg';
   const [isInFavorites, setIsInFavorites] = useState(false);
+
+  const images = sprites.other ? getSpriteImages(sprites.other) : [];
+  const defaultImage = 'https://via.placeholder.com/200';
 
   const handleToggleFavorite = () => {
     localFavorites.toggleFavorite(id);
@@ -35,15 +41,31 @@ export const PokemonDetail: React.FC<Props> = ({ pokemon }) => {
   return (
     <Grid.Container css={{ marginTop: '5px' }} gap={2}>
       <Grid xs={12} sm={4}>
-        <Card isHoverable css={{ padding: '30px' }}>
+        <Card css={{ padding: '30px' }}>
           <Card.Body css={{ p: 0 }}>
-            <Card.Image src={img} width='100%' height='200px' alt={name} />
+            {images.length === 0 ? (
+              <Card.Image src={defaultImage} width='100%' height='200px' alt={name} />
+            ) : (
+              <Swiper
+                modules={[Navigation, Autoplay]}
+                spaceBetween={10}
+                slidesPerView={1}
+                navigation
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                className='w-full'>
+                {images.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <Card.Image src={image} height='200px' alt={`${name} sprite ${index}`} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
           </Card.Body>
         </Card>
       </Grid>
 
       <Grid xs={12} sm={8}>
-        <Card>
+        <Card css={{ padding: '1rem' }}>
           <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
             <Row wrap='wrap' justify='space-between' align='center'>
               <Text h1 transform='capitalize'>
@@ -56,27 +78,28 @@ export const PokemonDetail: React.FC<Props> = ({ pokemon }) => {
           </Card.Header>
 
           <Card.Body>
-            <Text size={30} css={{ marginTop: '20px' }}>
-              Galería de Sprites:
-            </Text>
-            <Container display='flex' direction='row' gap={1}>
-              <Image src={sprites.front_default} alt={`${name} Front`} width={200} height={200} />
-              <Image src={sprites.back_default} alt={`${name} Back`} width={200} height={200} />
-              <Image src={sprites.front_shiny} alt={`${name} Front Shiny`} width={200} height={200} />
-              <Image src={sprites.back_shiny} alt={`${name} Back Shiny`} width={200} height={200} />
+            <Text size={30}>Sprites:</Text>
+            <Container direction='row' display='flex' gap={0}>
+              <Image src={sprites.front_default} alt={name} />
+              <Image src={sprites.back_default} alt={name} />
+              <Image src={sprites.front_shiny} alt={name} />
+              <Image src={sprites.back_shiny} alt={name} />
             </Container>
-            <Text size={30}>Information:</Text>
-            <Container display='flex' direction='column' gap={1}>
-              <Text>
-                <strong>Type(s):</strong> {types.map((t) => t.type.name).join(', ')}
+
+            <Text size={30} css={{ marginTop: '20px' }}>
+              Information:
+            </Text>
+            <Container className='flex flex-col gap-2 md:flex-row'>
+              <Text className='flex-grow'>
+                <strong>Type(s):</strong> {types.map((t) => t.type.name)?.join(', ')}
               </Text>
-              <Text>
+              <Text className='flex-grow'>
                 <strong>Weight:</strong> {`${weight / 10} kg`}
               </Text>
-              <Text>
+              <Text className='flex-grow'>
                 <strong>Height:</strong> {`${height / 10} m`}
               </Text>
-              <Text>
+              <Text className='flex-grow'>
                 <strong>Base Experience:</strong> {base_experience}
               </Text>
             </Container>
@@ -84,11 +107,20 @@ export const PokemonDetail: React.FC<Props> = ({ pokemon }) => {
             <Text size={30} css={{ marginTop: '20px' }}>
               Stats:
             </Text>
-            <Container display='flex' direction='column' gap={1}>
+            <Container className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
               {stats.map((stat) => (
-                <Text key={stat.stat.name}>
-                  <strong>{stat.stat.name.replace('-', ' ').toUpperCase()}:</strong> {stat.base_stat}
-                </Text>
+                <Container key={stat.stat.name} className='p-0'>
+                  <Text className='whitespace-nowrap'>
+                    <strong>{stat.stat.name.replace('-', ' ').toUpperCase()}:</strong> {stat.base_stat}
+                  </Text>
+                  <Progress
+                    value={stat.base_stat}
+                    max={100}
+                    css={{
+                      marginTop: '4px',
+                    }}
+                  />
+                </Container>
               ))}
             </Container>
           </Card.Body>
