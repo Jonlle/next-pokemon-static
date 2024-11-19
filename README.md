@@ -10,14 +10,14 @@ You can access the production application at the following link: [PokeFavorites]
 
 Here are some screenshots of the application:
 
-![Pokémon List](screenshots/lista_pokemon.png)  
-*Main page showing the list of Pokémon.*
+![Pokémon List](screenshots\pokemon_list.png)  
+_Main page showing the list of Pokémon._
 
-![Pokémon Details](screenshots/detalles_pokemon.png)  
-*Details page of a specific Pokémon.*
+![Pokémon Details](screenshots\pokemon_details.png)  
+_Details page of a specific Pokémon._
 
-![Favorites Page](screenshots/pagina_favoritos.png)  
-*Page showing the user's favorite Pokémon.*
+![Favorites Page](screenshots\favorite_page.png)  
+_Page showing the user's favorite Pokémon._
 
 ## Technologies Used
 
@@ -31,6 +31,7 @@ Here are some screenshots of the application:
 1. **Pokémon List**: Displays the first 151 Pokémon from the first generation. Each Pokémon in the list includes an image and its name. Clicking on a Pokémon navigates to a details page.
 
 2. **Pokémon Details Page**:
+
    - Detailed information about each Pokémon, including sprites from different poses and versions.
    - Favorite button to add/remove the Pokémon from the favorites list.
    - Confetti visual effect when adding a Pokémon to favorites.
@@ -54,17 +55,20 @@ This application connects to the PokeAPI to obtain detailed data about Pokémon,
 ## 🚀 Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/Jonlle/next-pokemon-static.git
    cd next-pokemon-static
    ```
 
 2. Install the dependencies:
+
    ```bash
    npm install
    ```
 
 3. Start the development server:
+
    ```bash
    npm run dev
    ```
