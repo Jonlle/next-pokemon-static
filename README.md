@@ -10,13 +10,13 @@ You can access the production application at the following link: [PokeFavorites]
 
 Here are some screenshots of the application:
 
-![Pokémon List](screenshots\pokemon_list.png)  
+![Pokémon List](screenshots/pokemon_list.png)  
 _Main page showing the list of Pokémon._
 
-![Pokémon Details](screenshots\pokemon_details.png)  
+![Pokémon Details](screenshots/pokemon_details.png)  
 _Details page of a specific Pokémon._
 
-![Favorites Page](screenshots\favorite_page.png)  
+![Favorites Page](screenshots/favorite_page.png)  
 _Page showing the user's favorite Pokémon._
 
 ## Technologies Used
