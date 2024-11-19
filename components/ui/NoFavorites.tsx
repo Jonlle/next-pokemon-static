@@ -11,7 +11,7 @@ export const NoFavorites = () => {
         justifyContent: 'center',
         alignSelf: 'center',
       }}>
-      <Text h1>No hay favoritos</Text>
+      <Text h1>There are no favorites</Text>
       <Image
         src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/152.svg'}
         width={250}
